@@ -1,4 +1,4 @@
-package com.kosmo.ver;
+package project.web.base;
 
 import java.util.ArrayList;
 import java.util.HashMap;

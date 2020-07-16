@@ -1,4 +1,4 @@
-package com.kosmo.ver;
+package project.web.base;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

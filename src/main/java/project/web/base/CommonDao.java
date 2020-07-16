@@ -1,15 +1,19 @@
-package com.kosmo.ver;
+package project.web.base;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommonLogic {
+public class CommonDao {
 	@Autowired
-	private CommonDao commonDao = null;
+	SqlSessionTemplate sqlSessionTemplate = null;
+
 	public String currentTime() {
 		String cdate = null;
-		cdate = commonDao.currentTime();
+		cdate = sqlSessionTemplate.selectOne("currentTime");
 		return cdate;
 	}
+	
+	
 }

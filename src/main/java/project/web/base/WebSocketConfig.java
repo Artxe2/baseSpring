@@ -1,4 +1,4 @@
-package com.kosmo.ver;
+package project.web.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.kosmo.ver.EchoHandler;
+import project.web.base.EchoHandler;
 
 public class WebSocketConfig implements WebSocketConfigurer {
 	Logger logger = LoggerFactory.getLogger(WebSocketConfig.class);

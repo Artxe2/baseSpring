@@ -1,4 +1,4 @@
-package com.kosmo.ver;
+package project.web.base;
 
 import java.text.DateFormat;
 import java.util.Date;

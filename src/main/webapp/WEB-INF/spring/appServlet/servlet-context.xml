@@ -31,14 +31,14 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<beans:bean id="echoHandler" class="com.kosmo.ver.EchoHandler"/>
+	<beans:bean id="echoHandler" class="project.web.base.EchoHandler"/>
 	<beans:bean id="boardController" class="mvc.board.BoardController">
 		<beans:property name="boardLogic" ref="board-logic"/>
 	</beans:bean>
 	<websocket:handlers>
 			<websocket:mapping handler="echoHandler" path="/echo"/>
 	</websocket:handlers>
-	<context:component-scan base-package="com.kosmo.ver" />
+	<context:component-scan base-package="project.web.base" />
 	<context:component-scan base-package="mvc.board" />
 	<context:component-scan base-package="transact.aution" />
 	

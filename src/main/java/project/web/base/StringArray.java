@@ -1,4 +1,4 @@
-package com.kosmo.ver;
+package project.web.base;
 
 public class StringArray {
 
