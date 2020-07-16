@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="himCar" class="mvc.board.Sonata">
+		<constructor-arg index="0" type="java.lang.String" value="자주색"/>
+		<constructor-arg index="1" type="int" value="0"/>
+		<constructor-arg index="2" type="int" value="4"/>
+	</bean>
+	<bean id="herCar" class="mvc.board.Sonata">
+		<constructor-arg index="0" type="java.lang.String" value="흰색"/>
+		<constructor-arg index="1" type="int" value="50"/>	
+	</bean>
+</beans>	
