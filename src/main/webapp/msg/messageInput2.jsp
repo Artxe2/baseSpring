@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/ver/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/base/js/jquery-3.4.1.js"></script>
 <script>
 	function connectWS(){
-		var ws = new WebSocket("ws:\\\\192.168.0.244:5000\\echo?roomCreate:kosmo59");
+		var ws = new WebSocket("ws:\\\\192.168.0.244:5000\\wsx?roomCreate:kosmo59");
 		socket = ws;	
 		ws.open = function(message){
 			console.log(message);

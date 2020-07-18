@@ -11,37 +11,64 @@
 		http://www.springframework.org/schema/websocket https://www.springframework.org/schema/websocket/spring-websocket.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
-
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	<tx:annotation-driven />
+	<!-- 태그, 어노테이션 설정 부분
+	
+	디폴트 핸들러 매핑 부분 -->
+	<bean id="default-handler-mapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<!-- 디폴트 핸들러 매핑 부분
+	
+	컨트롤러 url 매핑 부분 -->
+	<bean id="url-mapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/base/*">baseController</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 
+		
+	cos.jar 파일 업로드 설정 부분 -->
 	<beans:bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="10485760"/>
+		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
+	<!-- cos.jar 파일 업로드 설정 부분
+	
+	리소스 매핑 설정 부분 -->
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/js/**" location="/js/" />
-	<resources mapping="/css/**" location="/css/" />
-	<resources mapping="/images/**" location="/images/" />
-
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<resources location="/resources/" mapping="/resources/**" />
+	<resources location="/css/" mapping="/css/**" />
+	<resources location="/images/" mapping="/images/**" />
+	<resources location="/js/" mapping="/js/**" />
+	<!-- 리소스 매핑 설정 부분
+	
+	WEB-INF path 설정 부분 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	<beans:bean id="echoHandler" class="project.web.base.EchoHandler"/>
-	<beans:bean id="boardController" class="mvc.board.BoardController">
-		<beans:property name="boardLogic" ref="board-logic"/>
+	<!-- WEB-INF path 설정 부분
+	
+	bean Class 설정 부분 -->
+	<beans:bean id="echoHandler" class="project.web.base.WsHandler"/>
+	<beans:bean id="baseController" class="spring.mvc.BaseController">
+		<beans:property name="baseLogic" ref="baseLogic"/>
 	</beans:bean>
 	<websocket:handlers>
-			<websocket:mapping handler="echoHandler" path="/echo"/>
+			<websocket:mapping handler="wsHandler" path="/wsx"/>
 	</websocket:handlers>
+	<!-- bean Class 설정 부분
+	
+	컴포넌트 패키지 폴더 설정 부분 -->
 	<context:component-scan base-package="project.web.base" />
-	<context:component-scan base-package="mvc.board" />
-	<context:component-scan base-package="transact.aution" />
+	<context:component-scan base-package="spring.mvc" />
+	<!-- 컴포넌트 패키지 폴더 설정 부분
 	
-	
-	
+	end -->
 </beans:beans>
