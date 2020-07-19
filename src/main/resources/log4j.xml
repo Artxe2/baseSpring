@@ -11,7 +11,13 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.kosmo.ver">
+	<logger name="project.web.base">
+		<level value="info" />
+	</logger>
+	<logger name="project.web.backend">
+		<level value="info" />
+	</logger>
+	<logger name="org.apache.mybatis">
 		<level value="info" />
 	</logger>
 	

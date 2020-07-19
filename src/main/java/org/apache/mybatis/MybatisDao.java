@@ -1,4 +1,4 @@
-package org.apache.ibatis;
+package org.apache.mybatis;
 
 import java.util.List;
 import java.util.Map;

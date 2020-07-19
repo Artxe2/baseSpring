@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/base/*", produces = "text/plain;charset=UTF-8")
+@RequestMapping(value = "/rest/*", produces = "text/plain;charset=UTF-8")
 public class RestBaseController {
 	@GetMapping(value = "current_time")
 	public String current_time(Locale locale) {

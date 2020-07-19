@@ -16,37 +16,25 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	<tx:annotation-driven />
-	<!-- 태그, 어노테이션 설정 부분
+	<!-- Tag, annotation 설정 부분
 	
-	디폴트 핸들러 매핑 부분 -->
-	<bean id="default-handler-mapping"
+	Default handler 매핑 부분 -->
+	<beans:bean id="default-handler-mapping"
 		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
-	<!-- 디폴트 핸들러 매핑 부분
-	
-	컨트롤러 url 매핑 부분 -->
-	<bean id="url-mapping"
-		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="mappings">
-			<props>
-				<prop key="/base/*">baseController</prop>
-			</props>
-		</property>
-	</bean>
-	<!-- 
-		
-	cos.jar 파일 업로드 설정 부분 -->
+	<!-- Default handler 매핑 부분
+
+	File upload 설정 부분 -->
 	<beans:bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
-	<!-- cos.jar 파일 업로드 설정 부분
+	<!-- File upload 설정 부분
 	
-	리소스 매핑 설정 부분 -->
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	Resource 맵핑 설정 부분 -->
 	<resources location="/resources/" mapping="/resources/**" />
 	<resources location="/css/" mapping="/css/**" />
 	<resources location="/images/" mapping="/images/**" />
 	<resources location="/js/" mapping="/js/**" />
-	<!-- 리소스 매핑 설정 부분
+	<!-- Resource 맵핑 설정 부분
 	
 	WEB-INF path 설정 부분 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -55,20 +43,18 @@
 	</beans:bean>
 	<!-- WEB-INF path 설정 부분
 	
-	bean Class 설정 부분 -->
-	<beans:bean id="echoHandler" class="project.web.base.WsHandler"/>
-	<beans:bean id="baseController" class="spring.mvc.BaseController">
-		<beans:property name="baseLogic" ref="baseLogic"/>
-	</beans:bean>
+	WebSocket 설정 부분 -->
+	<beans:bean id="wsHandler" class="project.web.socket.WsHandler" />
 	<websocket:handlers>
-			<websocket:mapping handler="wsHandler" path="/wsx"/>
+			<websocket:mapping handler="wsHandler" path="/ws" />
 	</websocket:handlers>
-	<!-- bean Class 설정 부분
+	<!-- WebSocket 설정 부분
 	
-	컴포넌트 패키지 폴더 설정 부분 -->
+	Component 패키지 폴더 설정 부분 -->
 	<context:component-scan base-package="project.web.base" />
-	<context:component-scan base-package="spring.mvc" />
-	<!-- 컴포넌트 패키지 폴더 설정 부분
+	<context:component-scan base-package="project.web.backend" />
+	<context:component-scan base-package="project.web.socket" />
+	<!-- Component 패키지 폴더 설정 부분
 	
 	end -->
 </beans:beans>

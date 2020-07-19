@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	<!-- 태그 설정부분
+	<!-- Tag 설정부분
 	
 	HicariCP 설정부분 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -73,11 +73,11 @@
 	</bean>		
 	<!-- Mybatis 설정 부분
 	
-	logic 클래스 매핑 부분 -->
-	<bean id="baseLogic" class="spring.mvc.BaseLogic">
+	Logic 클래스 매핑 부분 -->
+	<bean id="baseLogic" class="project.web.backend.BaseLogic">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
-	<!-- logic 클래스 매핑 부분
+	<!-- Logic 클래스 매핑 부분
 	
 	end -->
 </beans>
