@@ -4,5 +4,6 @@
 <configuration>
 	<mappers>
 		<mapper resource="mapper/current_time.xml" />
+		<mapper resource="mapper/transaction.xml" />
 	</mappers>
 </configuration>
