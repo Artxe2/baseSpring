@@ -19,7 +19,7 @@ public class BaseLogic {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 
-	protected String current_time(Map<String, Object> pMap) {
+	protected String current_time_tx(Map<String, Object> pMap) {
 		logger.info("BaseLogic - current_time");
 		return (String) MybatisDao.selectObject(sqlSessionTemplate, "current_time", pMap);
 	}

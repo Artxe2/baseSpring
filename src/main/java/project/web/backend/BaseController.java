@@ -22,7 +22,7 @@ public class BaseController extends MultiActionController {
 	public void current_time(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		logger.info("BaseController - current_time");
 		Map<String, Object> pMap = HashMapBinder.getParameterMap(request);
-		Vpw.printString(response, baseLogic.current_time(pMap));
+		Vpw.printString(response, baseLogic.current_time_tx(pMap));
 	}
 
 	public String file_upload(HttpServletRequest request, HttpServletResponse response) {
