@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.dao.DataAccessException;
 
 public final class MybatisDao {
-
 	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MybatisDao.class);
 
 	public static List<Map<String, Object>> selectList(SqlSession sqlSessionTemplate, String sql,
