@@ -77,9 +77,7 @@
 	Logic 클래스 매핑 부분 -->
 	<bean id="baseLogic" class="project.web.backend.BaseLogic">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-		<property name="dao" ref="dao"/>
 	</bean>
-	<bean id="dao" class="org.apache.mybatis.Dao" />
 	<!-- Logic 클래스 매핑 부분
 	
 	end -->
