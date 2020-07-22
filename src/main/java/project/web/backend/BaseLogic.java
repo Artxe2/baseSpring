@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.mybatis.Dao;
 import org.apache.mybatis.MybatisDao;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -14,12 +13,6 @@ import project.web.base.Vpw;
 public class BaseLogic {
 	org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(BaseLogic.class);
 	private SqlSessionTemplate sqlSessionTemplate;
-
-	private Dao dao;
-
-	public void setDao(Dao dao) {
-		this.dao = dao;
-	}
 
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
