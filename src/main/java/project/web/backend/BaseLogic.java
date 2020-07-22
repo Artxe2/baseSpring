@@ -32,14 +32,12 @@ public class BaseLogic {
 	}
 
 	protected String txCurrent_time(HttpServletRequest request) throws Exception {
-		logger.info("BaseLogic - current_time");
+		logger.info("BaseLogic - txCurrent_time");
 		Map<String, Object> pMap = HashMapBinder.getParameterMap(request);
-		int test1 = 0;
-		int test2 = 0;
-		test1 = MybatisDao.insert(sqlSessionTemplate, "test1", pMap);
-		System.out.println("test1: " + test1);
-		test2 = MybatisDao.insert(sqlSessionTemplate, "test2", pMap);
-		System.out.println("test2: " + test2);
+		int test1 = MybatisDao.insert(sqlSessionTemplate, "test1", pMap);
+		logger.info("test1: " + test1);
+		int test2 = MybatisDao.insert(sqlSessionTemplate, "test2", pMap);
+		logger.info("test2: " + test2);
 		return (String) MybatisDao.selectObject(sqlSessionTemplate, "current_time", pMap);
 	}
 

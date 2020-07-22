@@ -1,6 +1,5 @@
 package project.web.base;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 public class Vpw {
-	//ViewPathWrapper
+	// ViewPathWrapper
 	private static final Gson gson = new Gson();
 
 	public static String forward(String path) {
@@ -24,20 +23,27 @@ public class Vpw {
 		return "forward:/WEB-INF/jsp/" + path + ".jsp";
 	}
 
-	// Don't use that
-	public static void printString(HttpServletResponse response, String data) throws IOException {
+	public static void printString(HttpServletResponse response, String data) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(data);
+		try {
+			response.getWriter().print(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static void printJson(HttpServletResponse response, Object jsonElement) throws IOException {
+	public static void printJson(HttpServletResponse response, Object jsonElement) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(gson.toJson(jsonElement));
+		try {
+			response.getWriter().print(gson.toJson(jsonElement));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static void printJsonIncludeNull(HttpServletResponse response, Object jsonElement) throws IOException {
+	public static void printJsonIncludeNull(HttpServletResponse response, Object jsonElement) {
 		Iterator<String> i = Arrays.asList(gson.toJson(jsonElement).split("\"null\"")).iterator();
 		StringBuilder json = new StringBuilder(i.next());
 		while (i.hasNext()) {
@@ -46,6 +52,10 @@ public class Vpw {
 		}
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(json.toString());
+		try {
+			response.getWriter().print(json.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
