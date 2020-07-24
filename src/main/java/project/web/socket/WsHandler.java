@@ -21,6 +21,7 @@ public class WsHandler extends TextWebSocketHandler {
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		logger.info("handleTextMessage({},{})", session.getId(), message.getPayload());
+		session.sendMessage(message);
 		String msg_chat = "100";// 일반대화(1:n대화)
 		String msg_null = "101";// 빈 문자가 넘어올때
 		String msg_exit = "500";// 방 나갈때

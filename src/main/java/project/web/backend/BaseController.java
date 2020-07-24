@@ -1,7 +1,5 @@
 package project.web.backend;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,22 +15,27 @@ public class BaseController extends MultiActionController {
 		this.baseLogic = baseLogic;
 	}
 
-	public void current_time(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void current_time(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("BaseController - current_time");
+		String s;
 		try {
-			Vpw.printString(response, baseLogic.current_time(request));
+			s = baseLogic.txCurrent_time(request);
 		} catch (Exception e) {
 			e.printStackTrace();
+			s = "";
 		}
+		Vpw.printString(response, s);
 	}
 
 	public String file_upload(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("BaseController - file_upload");
+		String s;
 		try {
-			return baseLogic.file_upload(request);
+			s = baseLogic.file_upload(request);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "";
+			s = "";
 		}
+		return Vpw.redirect("base/file_upload");
 	}
 }
