@@ -1,4 +1,3 @@
-<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,37 +8,28 @@
 </head>
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function(e) {
-
 		document.querySelector('#eve_img').addEventListener('change', function(e) {
 			document.querySelector('#pre_view').innerHTML = '';
-			var get_file = e.target.files;
-
-			var image = document.createElement('img');
-
-			/* FileReader 객체 생성 */
-			var reader = new FileReader();
-
-			/* reader 시작시 함수 구현 */
+			let get_files = e.target.files;
+			let image = document.createElement('img');
+			let reader = new FileReader();
 			reader.onload = (function(aImg) {
 				console.log(1);
-
 				return function(e) {
 					console.log(3);
-					/* base64 인코딩 된 스트링 데이터 */
 					aImg.src = e.target.result
-					aImg.width = 300;
-					aImg.height = 200;
+					aImg.width = 450;
+					aImg.height = 300;
 				}
 			})(image)
-
-			if (get_file) {
-				/* 
-				    get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
-				    onload 에 설정했던 return 으로 넘어간다.
-				    이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
-				 */
-				reader.readAsDataURL(get_file[0]);
+			if (get_files) {
 				console.log(2);
+				for (let i = 0; i < get_files.length; i++) {
+					if (get_files[i].type && get_files[i].type.indexOf('image') > -1) {						
+						reader.readAsDataURL(get_files[i]);
+						break;
+					}
+				}
 			}
 			document.querySelector('#pre_view').appendChild(image);
 		});
@@ -49,9 +39,9 @@
 	<div id=pre_view></div>
 	<form id="f_test" method="post" enctype="multipart/form-data"
 		action="<%=request.getContextPath() %>/base/file_upload">
-		<input type="file" id="eve_img" name="file"><br>
-		<input type="text" name="text"> <input type="submit"
-			value="전송">
+		<input type="file" id="eve_img" name="i_file"><br>
+		<input type="text" name="i_text"> <input type="submit"
+			value="Send">
 	</form>
 </body>
 </html>

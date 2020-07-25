@@ -33,9 +33,11 @@
 	
 	Resource 맵핑 설정 부분 -->
 	<resources location="/resources/" mapping="/resources/**" />
+	<!-- 
 	<resources location="/css/" mapping="/css/**" />
 	<resources location="/images/" mapping="/images/**" />
 	<resources location="/js/" mapping="/js/**" />
+	 -->
 	<!-- Resource 맵핑 설정 부분
 	
 	WEB-INF path 설정 부분 -->

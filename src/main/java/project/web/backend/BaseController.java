@@ -19,7 +19,7 @@ public class BaseController extends MultiActionController {
 		logger.info("BaseController - current_time");
 		String s;
 		try {
-			s = baseLogic.txCurrent_time(request);
+			s = baseLogic.current_time(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			s = "";
