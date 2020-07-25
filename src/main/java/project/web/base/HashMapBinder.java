@@ -19,7 +19,6 @@ public class HashMapBinder {
 	private static final String UPLOADFOLDER = new java.io.File("src/main/webapp/resources/uploaded_files").getAbsolutePath();
 
 	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
-		logger.info("getParameterMap() ");
 		Map<String, Object> pMap = new HashMap<>();
 		Enumeration<String> names = request.getParameterNames();
 		while (names.hasMoreElements()) {
@@ -38,6 +37,8 @@ public class HashMapBinder {
 			fullPath.append(i.next());
 		}
 		Map<String, Object> pMap = new HashMap<>();
+		System.out.println(new java.io.File("").getAbsolutePath());
+		logger.info(UPLOADFOLDER);
 		MultipartRequest multi = new MultipartRequest(request, fullPath.toString(), 50 * 1024 * 1024, "UTF-8",
 				new DefaultFileRenamePolicy());
 		Enumeration<String> names = multi.getParameterNames();
