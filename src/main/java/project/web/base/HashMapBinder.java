@@ -15,9 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class HashMapBinder {
 	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(HashMapBinder.class);
-	//	private static final String rootPath= "C:\\workspace\\baseSpring\\src\\main\\webapp";
-	private static final String UPLOADFOLDER = new java.io.File("src/main/webapp/resources/uploaded_files").getAbsolutePath();
-
+	private static final String ROOTPATH= "D:\\workspace_jsp\\basePojo\\WebContent\\resources\\uploaded_files";
 	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
 		Map<String, Object> pMap = new HashMap<>();
 		Enumeration<String> names = request.getParameterNames();
@@ -31,43 +29,39 @@ public class HashMapBinder {
 
 	public static Map<String, Object> getMultipartMap(HttpServletRequest request, String path) throws ServletException, IOException{
 		Iterator<String> i = Arrays.asList(path.split("/")).iterator();
-		StringBuilder fullPath = new StringBuilder(UPLOADFOLDER);
+		StringBuilder fullPath = new StringBuilder(ROOTPATH);
 		while (i.hasNext()) {
 			fullPath.append("\\");
 			fullPath.append(i.next());
 		}
 		Map<String, Object> pMap = new HashMap<>();
-		System.out.println(new java.io.File("").getAbsolutePath());
-		logger.info(UPLOADFOLDER);
 		MultipartRequest multi = new MultipartRequest(request, fullPath.toString(), 50 * 1024 * 1024, "UTF-8",
 				new DefaultFileRenamePolicy());
 		Enumeration<String> names = multi.getParameterNames();
 		String name;
 		while (names.hasMoreElements()) {
 			name = names.nextElement();
+			logger.info(name + ": " + multi.getParameter(name));
 			pMap.put(name, multi.getParameter(name));
-			logger.info(name + ", " + multi.getParameter(name));
 		}
-		//		try {
-		//			Enumeration<String> files = multi.getFileNames();
-		//			File file;
-		//			if (files != null) {
-		//				while (files.hasMoreElements()) {
-		//					//					logger.info("files.hasMoreElements()");
-		//					String fname = files.nextElement();
-		//					logger.info("fname:" + fname);
-		//					String filePathName = path + "/" + multi.getFilesystemName(fname);
-		//					if (filePathName != null && filePathName.length() > 1) {
-		//						file = new File(filePathName);
-		//						pMap.put(fname, filePathName);
-		//						logger.info(fname + ", " + filePathName);
-		//					}
-		//				}
-		//			}
-		//
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
+		try {
+			Enumeration<String> files = multi.getFileNames();
+			java.io.File f;
+			String filePath;
+			if (files != null) {
+				while (files.hasMoreElements()) {
+					name = files.nextElement();
+					filePath = path + "/" + multi.getFilesystemName(name);
+					if (filePath != null && filePath.length() > 1) {
+						f = new java.io.File(filePath);
+						pMap.put(name, filePath);
+						logger.info(name + ": " + filePath + " - " + f.length());
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return pMap;
 	}
 }
