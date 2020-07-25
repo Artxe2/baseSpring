@@ -10,7 +10,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/base/current_time">baseController</prop>
-				<prop key="/base/file_upload">baseController</prop>
+				<prop key="/base/file_upload" >baseController</prop>
 			</props>
 		</property>
 	</bean>
