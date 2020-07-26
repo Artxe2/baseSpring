@@ -24,12 +24,14 @@
 		document.querySelector('#msg').addEventListener('keydown', (evt) => {
 			if (evt.keyCode == 13) {
 				evt.preventDefault();
-				if (document.querySelector('#s_method').value === 'A') {					
-					socket.send(A + document.querySelector('#msg').value);
-				} else {
-					socket.send(B + document.querySelector('#msg').value);
+				if (document.querySelector('#msg').value != '') {
+					if (document.querySelector('#s_method').value === 'A') {					
+						socket.send(A + document.querySelector('#msg').value);
+					} else {
+						socket.send(B + document.querySelector('#msg').value);
+					}
+					document.querySelector('#msg').value = '';
 				}
-				document.querySelector('#msg').value = '';
 			}
 		});
 	});
@@ -61,9 +63,6 @@
 		socket.onerror = (e) => {
 			console.log('Server Error');
 		};
-	}
-	function refreshUserList() {
-		
 	}
 </script>
 </head>
