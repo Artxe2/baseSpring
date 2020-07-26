@@ -1,21 +1,21 @@
 package project.web.base;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class HashMapBinder {
 	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(HashMapBinder.class);
-	private static final String ROOTPATH= "D:\\workspace_jsp\\basePojo\\WebContent\\resources\\uploaded_files";
+	private static final String ROOTPATH= "D:\\workspace_jsp\\baseSpring\\src\\main\\webapp\\static\\uploaded_files";
+
 	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
 		Map<String, Object> pMap = new HashMap<>();
 		Enumeration<String> names = request.getParameterNames();
@@ -27,40 +27,27 @@ public class HashMapBinder {
 		return pMap;
 	}
 
-	public static Map<String, Object> getMultipartMap(HttpServletRequest request, String path) throws ServletException, IOException{
-		Iterator<String> i = Arrays.asList(path.split("/")).iterator();
-		StringBuilder fullPath = new StringBuilder(ROOTPATH);
-		while (i.hasNext()) {
-			fullPath.append("\\");
-			fullPath.append(i.next());
-		}
-		Map<String, Object> pMap = new HashMap<>();
-		MultipartRequest multi = new MultipartRequest(request, fullPath.toString(), 50 * 1024 * 1024, "UTF-8",
-				new DefaultFileRenamePolicy());
-		Enumeration<String> names = multi.getParameterNames();
-		String name;
-		while (names.hasMoreElements()) {
-			name = names.nextElement();
-			logger.info(name + ": " + multi.getParameter(name));
-			pMap.put(name, multi.getParameter(name));
-		}
-		try {
-			Enumeration<String> files = multi.getFileNames();
-			java.io.File f;
-			String filePath;
-			if (files != null) {
-				while (files.hasMoreElements()) {
-					name = files.nextElement();
-					filePath = path + "/" + multi.getFilesystemName(name);
-					if (filePath != null && filePath.length() > 1) {
-						f = new java.io.File(filePath);
-						pMap.put(name, filePath);
-						logger.info(name + ": " + filePath + " - " + f.length());
-					}
-				}
+	public static Map<String, Object> getMultipartMap(HttpServletRequest request, String folder) throws ServletException, IOException{
+		Map<String, Object> pMap = getParameterMap(request);
+		List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("i_file");
+		java.io.File saveFile;
+		String filePath;
+		folder += "/";
+		int j = 0;
+		for (MultipartFile f : files) {
+			filePath = folder + f.getOriginalFilename();
+			saveFile = new java.io.File(ROOTPATH, filePath);
+			int i = 0;
+			while (saveFile.exists()) {
+				saveFile = new java.io.File(ROOTPATH, filePath.substring(0, filePath.lastIndexOf('.')) + ++i + '.' + filePath.substring(filePath.lastIndexOf('.') + 1));
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (i > 0) {
+				filePath = filePath.substring(0, filePath.lastIndexOf('.')) + ++i + '.' + filePath.substring(filePath.lastIndexOf('.') + 1);
+			}
+			f.transferTo(saveFile);
+			String name = f.getName() + j++;
+			pMap.put(name, filePath);
+			logger.info(name + ": " + filePath + " - " + f.getSize());
 		}
 		return pMap;
 	}

@@ -32,12 +32,12 @@
 	<!-- File upload 설정 부분
 	
 	Resource 맵핑 설정 부분 -->
-	<resources mapping="/**/**" location="/static/" />
+	<resources mapping="/static/**" location="/static/" />
 	<!-- Resource 맵핑 설정 부분
 	
 	WEB-INF path 설정 부분 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="prefix" value="/WEB-INF/jsp/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	<!-- WEB-INF path 설정 부분

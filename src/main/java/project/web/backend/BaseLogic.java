@@ -1,14 +1,11 @@
 package project.web.backend;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.mybatis.MybatisDao;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.web.base.HashMapBinder;
 import project.web.base.Vpw;
@@ -39,9 +36,8 @@ public class BaseLogic {
 
 	protected String file_upload(HttpServletRequest request) throws Exception {
 		logger.info("BaseLogic - file_upload");
-		List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("file");
+		Map<String, Object> pMap = HashMapBinder.getMultipartMap(request, "base_files");
 		try {
-			Map<String, Object> pMap = HashMapBinder.getMultipartMap(request, "base_files");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

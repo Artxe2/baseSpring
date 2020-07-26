@@ -39,7 +39,7 @@
 	<div id=pre_view></div>
 	<form id="f_test" method="post" enctype="multipart/form-data"
 		action="<%=request.getContextPath() %>/base/file_upload">
-		<input type="file" id="eve_img" name="i_file"><br>
+		<input type="file" id="eve_img" name="i_file" multiple><br>
 		<input type="text" name="i_text"> <input type="submit"
 			value="Send">
 	</form>

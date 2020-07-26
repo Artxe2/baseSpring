@@ -29,6 +29,7 @@
 				} else {
 					socket.send(B + document.querySelector('#msg').value);
 				}
+				document.querySelector('#msg').value = '';
 			}
 		});
 	});
@@ -45,9 +46,11 @@
 				document.querySelector('#text_area').innerHTML += a[1] + ": " + a[2] + '<br>';
 				document.querySelector('#text_area').scrollTop = document.querySelector('#text_area').scrollHeight;
 			} else if (a[0] === LOG_IN) {
-				
+				document.querySelector('#text_area').innerHTML += a[2] + a[3] + '<br>';
+				document.querySelector('#user_list').innerHTML += "<span id='" + a[1] + "'>" + a[2] + '(' + a[1] + ')<span><br>';				
 			} else if (a[0] === LOG_OUT) {
-				
+				document.querySelector('#text_area').innerHTML += a[2] + a[3] + '<br>';
+				documnet.querySelector('#user_list').removeChild(document.querySelector('#' + a[1]));
 			}
 		};
 
@@ -67,12 +70,12 @@
 <body>
 	<div id='user_name'>My Name: </div>
 	<div id='text_area'
-		style='border: 1px solid black; overflow: auto; width: 600px; height: 350px;'></div>
+		style='border: 2px solid black; overflow: auto; width: 600px; height: 350px;'></div>
 	<select id="s_method">
 		<option value='A'>A(to Me)</option>
 		<option value='B'>B(to All)</option>
 	</select>
-	<input type='text' id='msg' class='form-control'>
-	<div id='userList'></div>
+	<input type='text' id='msg' class='form-control' style='margin-bottom: 40px; width: 515px'>
+	<div id='user_list' style='border: 1px solid black; overflow: auto; width: 600px; height: 350px;'></div>
 </body>
 </html>

@@ -62,6 +62,8 @@ public class WsHandler extends TextWebSocketHandler {
 				StringBuilder msg = new StringBuilder();
 				msg.append(Pvo.LOG_IN);
 				msg.append(Pvo.Sharp);
+				msg.append(ws.getId());
+				msg.append(Pvo.Sharp);
 				msg.append(names.get(ws.getId()));
 				msg.append(Pvo.Sharp);
 				msg.append(" - Welcome");
@@ -72,6 +74,8 @@ public class WsHandler extends TextWebSocketHandler {
 		}
 		StringBuilder msg = new StringBuilder();
 		msg.append(Pvo.LOG_IN);
+		msg.append(Pvo.Sharp);
+		msg.append(session.getId());
 		msg.append(Pvo.Sharp);
 		msg.append(userName);
 		msg.append(Pvo.Sharp);
@@ -110,6 +114,8 @@ public class WsHandler extends TextWebSocketHandler {
 		sessionList.remove(session);
 		StringBuilder msg = new StringBuilder();
 		msg.append(Pvo.LOG_OUT);
+		msg.append(Pvo.Sharp);
+		msg.append(session.getId());
 		msg.append(Pvo.Sharp);
 		msg.append(names.get(session.getId()));
 		msg.append(Pvo.Sharp);
