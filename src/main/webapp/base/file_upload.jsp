@@ -1,32 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language='java' contentType='text/html; charset=UTF-8'
+	pageEncoding='UTF-8'%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset='UTF-8'>
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function(e) {
-		document.querySelector('#eve_img').addEventListener('change', function(e) {
+<script type='text/javascript'>
+	document.addEventListener('DOMContentLoaded', (e) => {
+		document.querySelector('#eve_img').addEventListener('change', (e) => {
 			document.querySelector('#pre_view').innerHTML = '';
-			let get_files = e.target.files;
+			let files = e.target.files;
 			let image = document.createElement('img');
 			let reader = new FileReader();
-			reader.onload = (function(aImg) {
+			reader.onload = ((img) => {
 				console.log(1);
-				return function(e) {
+				return (e) => {
 					console.log(3);
-					aImg.src = e.target.result
-					aImg.width = 450;
-					aImg.height = 300;
+					img.src = e.target.result
+					img.width = 450;
+					img.height = 300;
 				}
 			})(image)
-			if (get_files) {
+			if (files) {
 				console.log(2);
-				for (let i = 0; i < get_files.length; i++) {
-					if (get_files[i].type && get_files[i].type.indexOf('image') > -1) {						
-						reader.readAsDataURL(get_files[i]);
+				for (let i = 0; i < files.length; i++) {
+					if (files[i].type && files[i].type.indexOf('image') > -1) {						
+						reader.readAsDataURL(files[i]);
 						break;
 					}
 				}
@@ -36,12 +36,17 @@
 	});
 </script>
 <body>
-	<div id=pre_view></div>
-	<form id="f_test" method="post" enctype="multipart/form-data"
-		action="<%=request.getContextPath() %>/base/file_upload">
-		<input type="file" id="eve_img" name="i_file" multiple><br>
-		<input type="text" name="i_text"> <input type="submit"
-			value="Send">
+	<div id='pre_view'></div>
+	<form id='upload_form' method='post' enctype='multipart/form-data'
+		action='<%=request.getContextPath() %>/base/file_upload'>
+		<input type='file' id='eve_img' name='i_file'><br>
+		<input type='text' name='i_text'> 
+		<input type='submit' value='Send'>
 	</form>
-</body>
+	<div style='margin-bottom: 20px'></div>
+	<form id='download_form' method='get' action='<%=request.getContextPath() %>/base/file_download'>
+		<input type='text' value='base_files/고기.gif' name='file_path'>
+		<input type='submit' value='Download'>
+	</form>
+	</body>
 </html>

@@ -11,6 +11,7 @@
 			<props>
 				<prop key="/base/current_time">baseController</prop>
 				<prop key="/base/file_upload" >baseController</prop>
+				<prop key="/base/file_download" >baseController</prop>
 			</props>
 		</property>
 	</bean>
@@ -23,6 +24,7 @@
 			<props>
 				<prop key="/base/current_time">current_time</prop>
 				<prop key="/base/file_upload">file_upload</prop>
+				<prop key="/base/file_download">file_download</prop>
 			</props>
 		</property>
 	</bean>

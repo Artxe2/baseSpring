@@ -1,12 +1,12 @@
-<%@page import="project.web.socket.Pvo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import='project.web.socket.Pvo'%>
+<%@ page language='java' contentType='text/html; charset=UTF-8'
+	pageEncoding='UTF-8'%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset='UTF-8'>
 <title>Insert title here</title>
-<script type="text/javascript">
+<script type='text/javascript'>
 	let userName;
 	let socket;
 	let A = 'A\r\n';

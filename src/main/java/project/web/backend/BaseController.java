@@ -38,4 +38,9 @@ public class BaseController extends MultiActionController {
 		}
 		return Vpw.redirect("base/file_upload");
 	}
+
+	public String file_download(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("BaseController - file_download");
+		return "base/file_download";
+	}
 }
