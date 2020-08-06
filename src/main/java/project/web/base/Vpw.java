@@ -1,15 +1,8 @@
 package project.web.base;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
-import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-
 public class Vpw {
 	// ViewPathWrapper
-	private static final Gson gson = new Gson();
+	private static final com.google.gson.Gson gson = new com.google.gson.Gson();
 
 	public static String forward(String path) {
 		return "forward:/" + path + ".jsp";
@@ -23,7 +16,7 @@ public class Vpw {
 		return "forward:/WEB-INF/jsp/" + path + ".jsp";
 	}
 
-	public static void printString(HttpServletResponse response, String data) {
+	public static void printString(javax.servlet.http.HttpServletResponse response, String data) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		try {
@@ -33,7 +26,7 @@ public class Vpw {
 		}
 	}
 
-	public static void printJson(HttpServletResponse response, Object jsonElement) {
+	public static void printJson(javax.servlet.http.HttpServletResponse response, Object jsonElement) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		try {
@@ -43,8 +36,8 @@ public class Vpw {
 		}
 	}
 
-	public static void printJsonIncludeNull(HttpServletResponse response, Object jsonElement) {
-		Iterator<String> i = Arrays.asList(gson.toJson(jsonElement).split("\"null\"")).iterator();
+	public static void printJsonIncludeNull(javax.servlet.http.HttpServletResponse response, Object jsonElement) {
+		java.util.Iterator<String> i = java.util.Arrays.asList(gson.toJson(jsonElement).split("\"null\"")).iterator();
 		StringBuilder json = new StringBuilder(i.next());
 		while (i.hasNext()) {
 			json.append("null");
