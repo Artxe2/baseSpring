@@ -14,16 +14,13 @@
 			let image = document.createElement('img');
 			let reader = new FileReader();
 			reader.onload = ((img) => {
-				console.log(1);
 				return (e) => {
-					console.log(3);
 					img.src = e.target.result
 					img.width = 450;
 					img.height = 300;
 				}
 			})(image)
 			if (files) {
-				console.log(2);
 				for (let i = 0; i < files.length; i++) {
 					if (files[i].type && files[i].type.indexOf('image') > -1) {						
 						reader.readAsDataURL(files[i]);
