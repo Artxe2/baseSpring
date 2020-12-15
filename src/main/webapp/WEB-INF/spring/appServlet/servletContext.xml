@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket https://www.springframework.org/schema/websocket/spring-websocket.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+	<!-- Tag, annotation 설정 부분	
+
+	Default handler 매핑 부분 -->
+	<beans:bean id="default-handler-mapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<!-- Default handler 매핑 부분
+
+	File upload 설정 부분 -->
+	<beans:bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800" />
+		<beans:property name="maxInMemorySize" value="52428800" />
+	</beans:bean>
+	<!-- File upload 설정 부분
+	
+	Resource 맵핑 설정 부분 -->
+	<resources mapping="/static/**" location="/static/" />
+	<!-- Resource 맵핑 설정 부분
+	
+	WEB-INF path 설정 부분 -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/jsp/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	<!-- WEB-INF path 설정 부분
+	
+	WebSocket 설정 부분 -->
+	<beans:bean id="wsHandler" class="project.web.socket.WsHandler" />
+	<websocket:handlers>
+			<websocket:mapping handler="wsHandler" path="/ws" />
+	</websocket:handlers>
+	<!-- WebSocket 설정 부분
+	
+	Component 패키지 폴더 설정 부분 -->
+	<context:component-scan base-package="project.web.base" />
+	<context:component-scan base-package="project.web.backend" />
+	<context:component-scan base-package="project.web.socket" />
+	<!-- Component 패키지 폴더 설정 부분
+	
+	end -->
+</beans:beans>

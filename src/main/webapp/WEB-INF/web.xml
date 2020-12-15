@@ -7,8 +7,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:/config/controller-context.xml
-			classpath:/config/logic-context.xml
+			classpath:/config/controllerContext.xml
+			classpath:/config/logicContext.xml
 		</param-value>
 	</context-param>
 	<filter>
@@ -39,7 +39,7 @@
 		<!--  		-->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<param-value>/WEB-INF/spring/appServlet/servletContext.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
